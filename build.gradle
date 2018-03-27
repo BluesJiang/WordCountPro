@@ -1,0 +1,72 @@
+plugins {
+    id 'com.gradle.build-scan' version '1.12.1'
+    id 'java'
+    id 'eclipse'
+    id 'idea'
+    id 'maven'
+}
+
+buildScan {
+    licenseAgreementUrl = "https://gradle.com/terms-of-service"
+    licenseAgree = "yes"
+}
+
+ext.junit4Version        = '4.12'
+ext.junitVintageVersion  = '5.1.0'
+ext.junitPlatformVersion = '1.1.0'
+ext.junitJupiterVersion  = '5.1.0'
+
+int javaVersion = Integer.valueOf((String) JavaVersion.current().getMajorVersion())
+if (javaVersion < 10) apply plugin: 'jacoco'
+
+jar {
+    baseName = 'wcPro'
+    version = '0.0.1'
+    manifest {
+        attributes 'Main-Class': 'Main'
+    }
+}
+
+test {
+    useJUnitPlatform {
+        // includeEngines 'junit-jupiter', 'junit-vintage'
+        // excludeEngines 'custom-engine'
+
+        // includeTags 'fast'
+        excludeTags 'slow'
+    }
+
+    testLogging {
+        events 'passed', 'skipped', 'failed'
+    }
+
+    reports {
+        html.enabled = true
+    }
+
+    if (javaVersion < 10) finalizedBy jacocoTestReport
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // JUnit Jupiter API and TestEngine implementation
+    testCompile("org.junit.jupiter:junit-jupiter-api:${junitJupiterVersion}")
+    testRuntime("org.junit.jupiter:junit-jupiter-engine:${junitJupiterVersion}")
+
+    testCompile("junit:junit:${junit4Version}")
+    testRuntime("org.junit.vintage:junit-vintage-engine:${junitVintageVersion}") {
+        because 'allows JUnit 3 and JUnit 4 tests to run'
+    }
+
+    testRuntime("org.junit.platform:junit-platform-launcher:${junitPlatformVersion}") {
+        because 'allows tests to run from IDEs that bundle older version of launcher'
+    }
+}
+
+task wrapper(type: Wrapper) {
+    description = 'Generates gradlew[.bat] scripts'
+    gradleVersion = '4.6'
+}

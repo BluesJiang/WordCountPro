@@ -1,3 +1,12 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'org.junit.platform:junit-platform-gradle-plugin:1.1.0'
+    }
+}
+
 plugins {
     id 'com.gradle.build-scan' version '1.12.1'
     id 'java'
@@ -10,6 +19,8 @@ buildScan {
     licenseAgreementUrl = "https://gradle.com/terms-of-service"
     licenseAgree = "yes"
 }
+
+apply plugin: 'org.junit.platform.gradle.plugin'
 
 ext.junit4Version        = '4.12'
 ext.junitVintageVersion  = '5.1.0'
@@ -27,44 +38,22 @@ jar {
     }
 }
 
-test {
-    useJUnitPlatform {
-        // includeEngines 'junit-jupiter', 'junit-vintage'
-        // excludeEngines 'custom-engine'
 
-        // includeTags 'fast'
-        excludeTags 'slow'
-    }
-
-    testLogging {
-        events 'passed', 'skipped', 'failed'
-    }
-
-    reports {
-        html.enabled = true
-    }
-
-    if (javaVersion < 10) finalizedBy jacocoTestReport
-}
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    // JUnit Jupiter API and TestEngine implementation
-    testCompile("org.junit.jupiter:junit-jupiter-api:${junitJupiterVersion}")
-    testRuntime("org.junit.jupiter:junit-jupiter-engine:${junitJupiterVersion}")
-
-    testCompile("junit:junit:${junit4Version}")
-    testRuntime("org.junit.vintage:junit-vintage-engine:${junitVintageVersion}") {
-        because 'allows JUnit 3 and JUnit 4 tests to run'
-    }
-
-    testRuntime("org.junit.platform:junit-platform-launcher:${junitPlatformVersion}") {
-        because 'allows tests to run from IDEs that bundle older version of launcher'
-    }
+    testCompile 'org.junit.jupiter:junit-jupiter-api:5.0.3'
+    testRuntime(
+            'org.junit.jupiter:junit-jupiter-engine:5.0.3',
+            'org.junit.vintage:junit-vintage-engine:4.12.1',
+            'org.junit.platform:junit-platform-launcher:1.0.1',
+            'org.junit.platform:junit-platform-runner:1.0.1'
+    )
 }
+
 
 task wrapper(type: Wrapper) {
     description = 'Generates gradlew[.bat] scripts'

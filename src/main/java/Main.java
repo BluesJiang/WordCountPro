@@ -7,7 +7,9 @@ import java.util.HashMap;
 
 public class Main {
     static public void main(String[] args) {
+
         IOController io_control = new IOController();
+        
         String valid_file = io_control.get(args);
         
         WordCounter wordcounter = new WordCounter();

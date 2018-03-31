@@ -45,7 +45,10 @@ repositories {
 }
 
 dependencies {
-    testCompile 'org.junit.jupiter:junit-jupiter-api:5.0.3'
+    testCompile ('org.junit.jupiter:junit-jupiter-api:5.0.3',
+                 'org.json:json:20090211'
+    )
+
     testRuntime(
             'org.junit.jupiter:junit-jupiter-engine:5.0.3',
             'org.junit.vintage:junit-vintage-engine:4.12.1',
@@ -59,3 +62,4 @@ task wrapper(type: Wrapper) {
     description = 'Generates gradlew[.bat] scripts'
     gradleVersion = '4.6'
 }
+

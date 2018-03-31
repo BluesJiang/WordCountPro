@@ -1,5 +1,8 @@
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.security.Principal;
 import java.security.KeyStore.Entry;
 import java.util.ArrayList;
@@ -43,7 +46,20 @@ class IOController {
         };
         ArrayList<Map.Entry<String, Integer>> countList = new ArrayList<Map.Entry<String, Integer>>(result.entrySet());
         countList.sort(compareValue);
-        System.out.println(countList);
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter("result.txt"));
+            for (Map.Entry<String, Integer> keyPair: countList) {
+                String key = keyPair.getKey();
+                Integer value = keyPair.getValue();
+                writer.write(""+key+": "+value+"\n");
+            }
+            writer.close();
+        } catch(IOException e) {
+            e.printStackTrace();
+            return -1;
+        }
+        
+        // System.out.println(countList);
         return 0;
     }
 }

@@ -3,6 +3,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.io.*;
+import java.lang.String;
 
 public class WordCounter {
     
@@ -44,16 +45,18 @@ public class WordCounter {
                     while(!(isEngChar((char)nowChar)) && !(isStrigula((char)nowChar)) && nowChar != -1){
                         nowChar = reader.read();
                     }
-                    if(isStrigula((char)nowChar)){
-                        nowChar = reader.read();
-                        if(isEngChar((char)nowChar) && !nowWord.equals("")){
-                            nowWord += String.valueOf((char)nowChar);
+                    while(nowChar != -1 && (isEngChar((char)nowChar) || isStrigula((char)nowChar))){
+                        if(isStrigula((char)nowChar)){
+                            nowChar = reader.read();
+                            if(nowChar != -1 && isEngChar((char)nowChar))
+                                nowWord += "-" + String.valueOf((char)nowChar) ; 
+                            else 
+                                break;
                         }
-                    }
-                    while(nowChar != -1 && isEngChar((char)nowChar)){
                         nowWord += String.valueOf((char)nowChar);
                         nowChar = reader.read();
                     }
+                    nowWord.toLowerCase();
                     if(wMap.containsKey(nowWord))
                         wMap.put(nowWord, wMap.get(nowWord) + 1);
                     else

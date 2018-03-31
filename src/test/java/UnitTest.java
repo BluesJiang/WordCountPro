@@ -66,10 +66,10 @@ class UnitTest {
     @Test
     void testIOHandling() {
         IOController io_controller = new IOController();
-        String[] args = {"main", "./build/resources/test/usecase1.txt","10023"};
+        String[] args = {"./build/resources/test/usecase1.txt","10023"};
         String res = io_controller.get(args);
         System.out.println(System.getProperty("user.dir"));
-        assertEquals(args[1], res);
+        assertEquals(args[0], res);
 
     }
 

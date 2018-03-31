@@ -23,8 +23,8 @@ class IOController {
      */
     public String get(String[] args) {
         String filename = "";
-        if (args.length >= 2) {
-            filename = args[1];
+        if (args.length >= 1) {
+            filename = args[0];
         }
         File file = new File(filename);
         if (!file.exists()) {

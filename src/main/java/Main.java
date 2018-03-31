@@ -11,6 +11,9 @@ public class Main {
         IOController io_control = new IOController();
         
         String valid_file = io_control.get(args);
+        if (valid_file.equals("")) {
+            return ;
+        }
         
         WordCounter wordcounter = new WordCounter();
         

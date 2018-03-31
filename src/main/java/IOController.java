@@ -22,7 +22,10 @@ class IOController {
      * @return a valid file name
      */
     public String get(String[] args) {
-        String filename = args[1];
+        String filename = "";
+        if (args.length >= 2) {
+            filename = args[1];
+        }
         File file = new File(filename);
         if (!file.exists()) {
             System.out.println("file not exists");

@@ -49,7 +49,10 @@ public class WordCounter {
                         if(isStrigula((char)nowChar)){
                             nowChar = reader.read();
                             if(nowChar != -1 && isEngChar((char)nowChar))
-                                nowWord += "-" + String.valueOf((char)nowChar) ; 
+                                if(nowWord.equals(""))
+                                    nowWord += String.valueOf((char)nowChar) ; 
+                                else
+                                    nowWord += "-" + String.valueOf((char)nowChar) ; 
                             else 
                                 break;
                         }

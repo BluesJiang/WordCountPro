@@ -57,7 +57,7 @@ public class WordCounter {
                     if(wMap.containsKey(nowWord))
                         wMap.put(nowWord, wMap.get(nowWord) + 1);
                     else
-                        wMap.put(nowWord, wMap.get(nowWord) + 1);
+                        wMap.put(nowWord, 1);
                 }
                 reader.close();
         }

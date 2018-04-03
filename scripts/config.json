@@ -4,6 +4,12 @@
     "word_size": [1, 10],
     "sep_size": [1,3],
     "word_repeat": [1, 300]
+    },
+    {
+        "num_of_type": 20,
+        "word_size": [1, 20],
+        "sep_size": [1,3],
+        "word_repeat": [20, 300]
     }
 
 ]

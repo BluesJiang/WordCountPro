@@ -66,7 +66,7 @@ public class WordCounter {
                     nowWord = nowWord.toLowerCase();
                     if(wMap.containsKey(nowWord))
                         wMap.put(nowWord, wMap.get(nowWord) + 1);
-                    else
+                    else 
                         wMap.put(nowWord, 1);
                 }
                 reader.close();

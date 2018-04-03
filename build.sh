@@ -2,7 +2,7 @@ echo '--------- building jar -----------'
 gradle build -x test
 
 echo '------ generating test case ------'
-python3 ./scripts/testcase_generate.py ./scripts/config.json
+python ./scripts/testcase_generate.py ./scripts/config.json
 
 echo '-------- setting test env --------'
 cp ./build/libs/* ./test

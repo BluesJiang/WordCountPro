@@ -20,7 +20,6 @@ def generate_usecase(num_of_type):
         word_len = randint(*config['word_size'])
         word_elements = randint(0, len(elements['words']), word_len)
         word = np.array(list(elements['words']))[word_elements]
-        # word = [s.upper() if word_upper_case[i] > 0 else s for i, s in enumerate(word)]
         word = word[1:] if word[0] == '-' else word
         word = word[:-1] if word[-1] == '-' else word
 
@@ -43,9 +42,14 @@ def generate_usecase(num_of_type):
         word_upper_case = randint(0, 2, len(key))
         key = ''.join([s.upper() if word_upper_case[i] > 0 else s for i, s in enumerate(list(key))])
         final_string += key
+        sep = ''
         for _ in range(randint(*config['sep_size'])):
-            final_string += elements['symbol'][randint(0, len(elements['symbol']))]
-            
+            sep += elements['symbol'][randint(0, len(elements['symbol']))]
+        if sep == '-':
+            while sep == '-':
+                sep = elements['symbol'][randint(0, len(elements['symbol']))]
+        final_string += sep
+
 
     print (final_string)
     with open('usecase.txt', 'w') as f:

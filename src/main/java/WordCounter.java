@@ -48,20 +48,20 @@ public class WordCounter {
                     while(nowChar != -1 && (isEngChar((char)nowChar) || isStrigula((char)nowChar))){
                         if(isStrigula((char)nowChar)){
                             nowChar = reader.read();
-                            if(nowChar != -1 && isEngChar((char)nowChar)){
+                            if(isEngChar((char)nowChar)){
                                 if(nowWord.equals(""))
                                     nowWord += String.valueOf((char)nowChar) ; 
                                 else
                                     nowWord += "-" + String.valueOf((char)nowChar) ; 
                                 nowChar = reader.read();
                             }
-                                
                             else 
                                 break;
                         }
-
-                        nowWord += String.valueOf((char)nowChar);
-                        nowChar = reader.read();
+                        if (isEngChar((char)nowChar)){
+                            nowWord += String.valueOf((char)nowChar);
+                            nowChar = reader.read();
+                        }
                     }
                     nowWord = nowWord.toLowerCase();
                     if(wMap.containsKey(nowWord))

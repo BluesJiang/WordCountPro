@@ -9,3 +9,6 @@ build/
 .DS_Store
 .vscode
 result.txt
+result_true.txt
+usecase.txt
+test/

@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -64,6 +65,7 @@ class UnitTest {
     }
 
     @Test
+    @DisplayName(@DisplayName("Custom test name containing spaces"))
     void testIOHandling() {
         IOController io_controller = new IOController();
         String[] args = {"./build/resources/test/usecase1.txt","10023"};
@@ -72,5 +74,7 @@ class UnitTest {
         assertEquals(args[0], res);
 
     }
+
+    
 
 }

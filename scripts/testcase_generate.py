@@ -36,10 +36,10 @@ def generate_usecase(num_of_type):
         key, val = None, 0
         while (val == 0):
             key_tmp = list(word_dict_tmp.keys())[randint(len(word_dict))]
-            val = word_dict[key_tmp]
+            val = word_dict_tmp[key_tmp]
             if val != 0:
                 key = key_tmp
-                val -= 1
+                word_dict_tmp[key_tmp] = val-1
         word_upper_case = randint(0, 2, len(key))
         key = ''.join([s.upper() if word_upper_case[i] > 0 else s for i, s in enumerate(list(key))])
         final_string += key

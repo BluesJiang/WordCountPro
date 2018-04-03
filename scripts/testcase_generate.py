@@ -64,7 +64,7 @@ def generate_usecase(num_of_type):
         f.write(result)
 
 def main():
-    generate_usecase(10)
+    generate_usecase(100)
 
 if __name__ == '__main__':
     main()

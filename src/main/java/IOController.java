@@ -44,7 +44,7 @@ class IOController {
         Comparator<Map.Entry<String, Integer>> compareValue = new Comparator<Map.Entry<String,Integer>>() {
             @Override
             public int compare(Map.Entry<String, Integer> obj1, Map.Entry<String, Integer> obj2) {
-                if (obj1.getValue() != obj2.getValue()) {
+                if (!obj1.getValue().equals(obj2.getValue())) {
                     return obj1.getValue() - obj2.getValue();
                 } else {
                     return obj1.getKey().compareTo(obj2.getKey());

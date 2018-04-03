@@ -2,7 +2,7 @@ from functools import reduce
 import numpy as np
 from numpy.random import randint
 import json
-import sys, os
+import sys, os, re
 
 elements = {
     "words": "abcdefghijklmnopqrstuvwxyz-",
@@ -13,20 +13,27 @@ def generate_usecase(configs):
     global elements
     
     path = os.path.join('test', 'testcase')
+    result_path = os.path.join('test', 'result')
     if not os.path.exists(path):
         os.makedirs(path)
-
+    if not os.path.exists(path):
+        os.makedirs(result_path)
     for config_idx, config in enumerate(configs):
         word_dict = {}
-        for i in range(config['num_of_type']):
+        i = 0
+        while i < config['num_of_type']:
             word_len = randint(*config['word_size'])
             word_elements = randint(0, len(elements['words']), word_len)
             word = np.array(list(elements['words']))[word_elements]
-            word = word[1:] if word[0] == '-' else word
-            word = word[:-1] if word[-1] == '-' else word
-
             word = ''.join(word)
+            word = re.sub(r'-{2,}','-', word)
+            word = re.sub(r'^-*', '', word)
+            word = re.sub(r'-*$', '', word)
+            if len(word) == 0:
+                continue
+            
             word_dict[word] = 0
+            i += 1
         total_count = 0
         for key in word_dict.keys():
             word_dict[key] = randint(*config['word_repeat'])
@@ -58,7 +65,7 @@ def generate_usecase(configs):
             f.write(final_string)
             
                 
-        sorted_key = sorted(word_dict.items(), key=lambda x:x[1])
+        sorted_key = sorted(word_dict.items(), key=lambda kv:(kv[1], kv[0]))
         result = ''
         for key, val in sorted_key:
             result += key + ': ' + str(val) + '\n'

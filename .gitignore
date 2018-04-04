@@ -8,6 +8,7 @@ bin/
 build/
 .DS_Store
 .vscode
+*.iml
 result.txt
 result_true.txt
 usecase.txt

@@ -16,7 +16,7 @@ def generate_usecase(configs):
     result_path = os.path.join('test', 'result')
     if not os.path.exists(path):
         os.makedirs(path)
-    if not os.path.exists(path):
+    if not os.path.exists(result_path):
         os.makedirs(result_path)
     for config_idx, config in enumerate(configs):
         word_dict = {}

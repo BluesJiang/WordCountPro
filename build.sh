@@ -19,9 +19,9 @@ echo 'testing ' ${jarname}
 num_test=num_test-1
 for i in $(seq 0 ${num_test})
 do
-    start=`python -c 'import time; print time.time()'`
+    start=`python -c 'import time; print (time.time())'`
     java -jar ${jarname} ./testcase/${i}_usecase.txt
-    end=`python -c 'import time; print time.time()'`
+    end=`python -c 'import time; print (time.time())'`
     cmp result.txt ./testcase/${i}_result_true.txt
     if [ ${?} == 0 ]; then
         correct_cnt=correct_cnt+1

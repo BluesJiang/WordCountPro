@@ -196,4 +196,14 @@ class UnitTest {
         HashMap result = wc.count(relativePath);
         assertEquals(0, result.size());
     }
+
+    @Test
+    @DisplayName("Border test: wc.count(endWithHyphen.txt)")
+    void testCountFileEndWithHyphen() {
+        String fileName = "endWithHyphen.txt";
+        String relativePath = fileParentPath + fileName;
+        WordCounter wc = new WordCounter();
+        HashMap result = wc.count(relativePath);
+        assertEquals(1, result.size());
+    }
 }

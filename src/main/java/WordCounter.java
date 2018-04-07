@@ -67,8 +67,6 @@ public class WordCounter {
                     // judge a legal word
                     while(nowChar != -1 && (isEngChar((char)nowChar) || isHyphen((char)nowChar))){
                         if(isHyphen((char)nowChar)){
-                            // Dangerous! What if file end with hyphen?
-                            // Add UnitTest to test this border condition
                             nowChar = reader.read();
                             if(isEngChar((char)nowChar)){
                                 if(nowWord.equals(""))

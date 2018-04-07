@@ -83,41 +83,41 @@ class UnitTest {
      */
     @Test
     void testIsEngChar() {
-        /** a English Alphabet */
-        final char[] alphabet = new char[52];
+        /* a English Alphabet */
+        final char[] ALPHABET = new char[52];
 
-        final char[] notAlphabet = {',', '&', '@', '\\', '/'};
+        final char[] NOT_ALPHABET = {',', '&', '@', '\\', '/'};
 
         char ch = 'a';
         for (int i = 0; i < 26; i++) {
-            alphabet[i] = ch;
+            ALPHABET[i] = ch;
             ch++;
         }
         ch = 'A';
         for (int i = 26; i < 52; i++) {
-            alphabet[i] = ch;
+            ALPHABET[i] = ch;
             ch++;
         }
 
         /* get a {@code Class} object of {@code WordCounter} */
         Class<WordCounter> classOfWordCounter = WordCounter.class;
-        // 获取目标类的实例
         try {
+            /* get an instance of target class */
             Object wcInstance = classOfWordCounter.newInstance();
             try {
                 Method privateMethod = classOfWordCounter.getDeclaredMethod("isEngChar", char.class);
                 privateMethod.setAccessible(true);
-                for (char letter: alphabet) {
+                for (char letter: ALPHABET) {
                     try {
-                        Object result = privateMethod.invoke(wcInstance, new Object[]{letter});
+                        boolean result = (Boolean) privateMethod.invoke(wcInstance, new Object[]{letter});
                         assertEquals(true, result);
                     } catch (InvocationTargetException e) {
                         e.printStackTrace();
                     }
                 }
-                for (char notLetter: notAlphabet) {
+                for (char notLetter: NOT_ALPHABET) {
                     try {
-                        Object result = privateMethod.invoke(wcInstance, new Object[]{notLetter});
+                        boolean result = (Boolean) privateMethod.invoke(wcInstance, new Object[]{notLetter});
                         assertEquals(false, result);
                     } catch (InvocationTargetException e) {
                         e.printStackTrace();
@@ -132,8 +132,45 @@ class UnitTest {
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
+    }
 
-
+    /**
+     * Use reflection to test {@code private} method {@isHyphen()}
+     */
+    @Test
+    void testIsHyphen() {
+        final char hyphen = '-';
+        final char[] notHyphenChars = {'a', 'b', ' ', '/'};
+        /* get a {@code Class} object of {@code WordCounter} */
+        Class<WordCounter> classOfWordCounter = WordCounter.class;
+        /* get an instance of target class */
+        try {
+            Object wcInstance = classOfWordCounter.newInstance();
+            try {
+                Method isHyphen = classOfWordCounter.getDeclaredMethod("isHyphen", char.class);
+                isHyphen.setAccessible(true);
+                try {
+                    boolean result = (Boolean) isHyphen.invoke(wcInstance, new Object[]{hyphen});
+                    assertEquals(true, result);
+                } catch (InvocationTargetException e) {
+                    e.printStackTrace();
+                }
+                for (char ch: notHyphenChars) {
+                    try {
+                        boolean result = (Boolean) isHyphen.invoke(wcInstance, new Object[]{ch});
+                        assertEquals(false, result);
+                    } catch (InvocationTargetException e) {
+                        e.printStackTrace();
+                    }
+                }
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            }
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
     }
 
 }

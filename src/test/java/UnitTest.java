@@ -1,7 +1,4 @@
-
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -9,12 +6,15 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 
+import org.junit.Rule;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.junit.rules.ExpectedException;
 
 class UnitTest {
 
@@ -173,4 +173,17 @@ class UnitTest {
         }
     }
 
+    @Rule
+    private ExpectedException exception = ExpectedException.none();
+
+    @Test
+    void testCountFileNotFoundException() {
+        String fileParentPath = "../resources/";
+        String fileName = "fileNotExist";
+        String relativePath = fileParentPath + fileName;
+        WordCounter wc = new WordCounter();
+        HashMap result = wc.count(relativePath);
+        exception.expect(IOException.class);
+        assertEquals(0, result.size());
+    }
 }

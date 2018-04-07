@@ -176,14 +176,24 @@ class UnitTest {
     @Rule
     private ExpectedException exception = ExpectedException.none();
 
+    String fileParentPath = "src/test/resources/";
+
     @Test
     void testCountFileNotFoundException() {
-        String fileParentPath = "../resources/";
         String fileName = "fileNotExist";
         String relativePath = fileParentPath + fileName;
         WordCounter wc = new WordCounter();
         HashMap result = wc.count(relativePath);
         exception.expect(IOException.class);
+        assertEquals(0, result.size());
+    }
+
+    @Test
+    void testCountEmptyFile() {
+        String fileName = "emptyFile.txt";
+        String relativePath = fileParentPath + fileName;
+        WordCounter wc = new WordCounter();
+        HashMap result = wc.count(relativePath);
         assertEquals(0, result.size());
     }
 }

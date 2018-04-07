@@ -62,7 +62,8 @@ class UnitTest {
     }
 
     @Test
-    @DisplayName("Custom test name containing spaces")
+//    @DisplayName("Custom test name containing spaces")
+    @DisplayName("Custom test file that doesn't exist")
     void testIOHandling() {
         IOController io_controller = new IOController();
         String[] args = {"./build/resources/test/usecase1.txt","10023"};

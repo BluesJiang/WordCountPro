@@ -65,7 +65,7 @@ def generate_usecase(configs):
             f.write(final_string)
             
                 
-        sorted_key = sorted(word_dict.items(), key=lambda kv:(kv[1], kv[0]))
+        sorted_key = sorted(word_dict.items(), key=lambda kv:(-kv[1], kv[0]))
         result = ''
         for key, val in sorted_key:
             result += key + ': ' + str(val) + '\n'

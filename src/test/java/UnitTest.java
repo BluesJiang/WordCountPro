@@ -56,9 +56,6 @@ class UnitTest {
             e.printStackTrace();
         }
         
-
-
-        
         int res = io_controller.save(testMap);
         assertEquals(0, res);
 
@@ -70,11 +67,11 @@ class UnitTest {
         IOController io_controller = new IOController();
         String[] args = {"./build/resources/test/usecase1.txt","10023"};
         String res = io_controller.get(args);
-        System.out.println(System.getProperty("user.dir"));
-        assertEquals(args[0], res);
-
+        String exp = args[0];
+        File f = new File(args[0]);
+        if (!f.exists()) {
+            exp = "";
+        }
+        assertEquals(exp, res);
     }
-
-    
-
 }

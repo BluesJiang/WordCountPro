@@ -23,12 +23,23 @@ public class WordCounter {
     WordCounter() {
     }
 
-
+    /**
+     * Return whether the argument is in the English alphabet.
+     * @param c
+     * @return {@code true} if the argument is in the English alphabet,
+     * otherwise {@code false}.
+     */
     private boolean isEngChar(char c){
         return ((c >= 'a' &&c <= 'z' )||(c >= 'A' && c<='Z'));
         
     }
 
+    /**
+     * Return whether the argument is hyphen, which is {@code -}.
+     * @param c
+     * @return {@code true} if the argument is hyphen
+     * otherwise {@code false}.
+     */
     private boolean isHyphen(char c){
         return (c == '-');
         

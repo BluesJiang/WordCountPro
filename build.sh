@@ -25,9 +25,9 @@ do
     cmp result.txt ./testcase/${i}_result_true.txt
     if [ ${?} == 0 ]; then
         correct_cnt=correct_cnt+1
-        echo 'test ' $i ' passed...time: ' `bc <<< $end-$start`
+        echo 'test ' $i ' passed...time: ' `python -c "print($end-$start)"`
     else
-        echo 'test ' $i ' failed...time: ' `bc <<< $end-$start`
+        echo 'test ' $i ' failed...time: ' `python -c "print($end-$start)"`
     fi
     mv result.txt ./result/${i}_result.txt
 done

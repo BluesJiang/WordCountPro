@@ -1,20 +1,28 @@
-
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.io.*;
 import java.lang.String;
 
+/**
+ * The {@code WordCounter} class is a multi-purpose text file
+ * counter, which can judge a legal word and count word numbers,
+ * to put the result to a {@code HashMap}.
+ * <br><br>
+ *
+ * @author VectorLu
+ * @author YangLeee
+ * @since JDK1.8
+ */
+
 public class WordCounter {
-    
+
+    /**
+     * Reserve the default {@code constructor}.
+     */
     WordCounter() {
     }
 
-
-    private boolean isNumber(char c){
-        return (c >= '0'&& c <= '9');
-        
-    }
 
     private boolean isEngChar(char c){
         return ((c >= 'a' &&c <= 'z' )||(c >= 'A' && c<='Z'));
@@ -30,7 +38,7 @@ public class WordCounter {
      * Counts the words in the specific file
      * 
      * @param filename the file to be counted
-     * @return the result saves the word(lowercased) as key and count as value
+     * @return the result saves the word(lowercase) as key and count as value
      */
     public HashMap<String, Integer> count(String filename) {
         FileReader reader = null;
@@ -41,11 +49,15 @@ public class WordCounter {
                 int nowChar = reader.read();    //nowChar represent now readFile character
                 while(nowChar != -1){
                     String nowWord = "";        //nowWord represent now word
+                    // skip char that isn't hyphen or isn't in English Alphabet 
                     while(nowChar != -1 && !(isEngChar((char)nowChar)) && !(isHyphen((char)nowChar))){
                         nowChar = reader.read();
                     }
+                    // judge a legal word
                     while(nowChar != -1 && (isEngChar((char)nowChar) || isHyphen((char)nowChar))){
                         if(isHyphen((char)nowChar)){
+                            // Dangerous! What if file end with hyphen?
+                            // Add UnitTest to test this border condition
                             nowChar = reader.read();
                             if(isEngChar((char)nowChar)){
                                 if(nowWord.equals(""))

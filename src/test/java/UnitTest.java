@@ -6,6 +6,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -75,4 +77,63 @@ class UnitTest {
         }
         assertEquals(exp, res);
     }
+
+    /**
+     * Use reflection to test {@code private} method {@isEngChar()}
+     */
+    @Test
+    void testIsEngChar() {
+        /** a English Alphabet */
+        final char[] alphabet = new char[52];
+
+        final char[] notAlphabet = {',', '&', '@', '\\', '/'};
+
+        char ch = 'a';
+        for (int i = 0; i < 26; i++) {
+            alphabet[i] = ch;
+            ch++;
+        }
+        ch = 'A';
+        for (int i = 26; i < 52; i++) {
+            alphabet[i] = ch;
+            ch++;
+        }
+
+        /* get a {@code Class} object of {@code WordCounter} */
+        Class<WordCounter> classOfWordCounter = WordCounter.class;
+        // 获取目标类的实例
+        try {
+            Object wcInstance = classOfWordCounter.newInstance();
+            try {
+                Method privateMethod = classOfWordCounter.getDeclaredMethod("isEngChar", char.class);
+                privateMethod.setAccessible(true);
+                for (char letter: alphabet) {
+                    try {
+                        Object result = privateMethod.invoke(wcInstance, new Object[]{letter});
+                        assertEquals(true, result);
+                    } catch (InvocationTargetException e) {
+                        e.printStackTrace();
+                    }
+                }
+                for (char notLetter: notAlphabet) {
+                    try {
+                        Object result = privateMethod.invoke(wcInstance, new Object[]{notLetter});
+                        assertEquals(false, result);
+                    } catch (InvocationTargetException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            }
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
 }

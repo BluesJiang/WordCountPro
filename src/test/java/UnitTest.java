@@ -6,9 +6,7 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
-
 import org.junit.Rule;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -206,4 +204,16 @@ class UnitTest {
         HashMap result = wc.count(relativePath);
         assertEquals(1, result.size());
     }
+
+    @Test
+    @DisplayName("Border test: single quotation mark")
+    void testSingleQuotationMark() {
+        String fileName = "singleQuotationMark.txt";
+        String relativePath = fileParentPath + fileName;
+        WordCounter wc = new WordCounter();
+        HashMap result = wc.count(relativePath);
+        assertEquals(2, result.size());
+    }
+
 }
+

@@ -70,8 +70,8 @@ def generate_usecase(configs):
         for key, val in sorted_key:
             result += key + ': ' + str(val) + '\n'
 
-        with open(os.path.join(path, '{}_result_true.txt'.format(config_idx)), 'w') as f:
-            f.write(result)
+        with open(os.path.join(path, '{}_result_true.txt'.format(config_idx)), 'wb') as f:
+            f.write(result.encode('utf8'))
 
         print('test case {} generated'.format(config_idx))
 

@@ -7,6 +7,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Iterator;
+
+import com.sun.webkit.event.WCChangeEvent;
 import org.junit.Rule;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -224,5 +226,16 @@ class UnitTest {
         HashMap result = wc.count(relativePath);
         assertEquals(1, result.size());
     }
+
+    @Test
+    @DisplayName("Border test: word with number")
+    void testCountWordWithNumber() {
+        String fileName = "wordWithNumber.txt";
+        String relativePath = fileParentPath + fileName;
+        WordCounter wc = new WordCounter();
+        HashMap result = wc.count(relativePath);
+        assertEquals(1, result.size());
+    }
+
 }
 

@@ -12,4 +12,4 @@ build/
 result.txt
 result_true.txt
 usecase.txt
-test/
+test/*

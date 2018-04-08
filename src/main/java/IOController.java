@@ -66,8 +66,6 @@ class IOController {
             e.printStackTrace();
             return -1;
         }
-        
-        // System.out.println(countList);
         return 0;
     }
 }

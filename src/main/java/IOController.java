@@ -54,14 +54,12 @@ class IOController {
         };
         ArrayList<Map.Entry<String, Integer>> countList = new ArrayList<Map.Entry<String, Integer>>(result.entrySet());
         countList.sort(compareValue);
-        try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter("result.txt"));
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("result.txt"))){
             for (Map.Entry<String, Integer> keyPair: countList) {
                 String key = keyPair.getKey();
                 Integer value = keyPair.getValue();
                 writer.write(""+key+": "+value+"\n");
             }
-            writer.close();
         } catch(IOException e) {
             e.printStackTrace();
             return -1;

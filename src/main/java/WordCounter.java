@@ -54,37 +54,40 @@ public class WordCounter {
     public HashMap<String, Integer> count(String filename) {
         FileReader reader = null;
         HashMap<String , Integer> wMap = new HashMap<String, Integer>();
-        try{
-                File file =new File(filename);
+        try {
+                File file = new File(filename);
                 reader = new FileReader(file);
-                int nowChar = reader.read();    //nowChar represent now readFile character
-                while(nowChar != -1){
-                    String nowWord = "";        //nowWord represent now word
+                //nowChar represent now readFile character
+                int nowChar = reader.read();    
+                while (nowChar != -1) {
+                    //nowWord represent now word
+                    String nowWord = "";        
                     // skip char that isn't hyphen or isn't in English Alphabet 
-                    while(nowChar != -1 && !(isEngChar((char)nowChar)) && !(isHyphen((char)nowChar))){
+                    while (nowChar != -1 && !(isEngChar((char)nowChar)) && !(isHyphen((char)nowChar))){
                         nowChar = reader.read();
                     }
                     // judge a legal word
-                    while(nowChar != -1 && (isEngChar((char)nowChar) || isHyphen((char)nowChar))){
-                        if(isHyphen((char)nowChar)){
+                    while (nowChar != -1 && (isEngChar((char)nowChar) || isHyphen((char)nowChar))){
+                        if (isHyphen((char)nowChar)) {
                             nowChar = reader.read();
-                            if(isEngChar((char)nowChar)){
-                                if("".equals(nowWord))
+                            if (isEngChar((char)nowChar)) {
+                                if ("".equals(nowWord)) {
                                     nowWord += String.valueOf((char)nowChar) ; 
-                                else
-                                    nowWord += "-" + String.valueOf((char)nowChar) ; 
+                                } else {
+                                    nowWord += "-" + String.valueOf((char)nowChar) ;
+                                }    
                                 nowChar = reader.read();
-                            }
-                            else 
+                            } else {
                                 break;
+                            }      
                         }
-                        if (isEngChar((char)nowChar)){
+                        if (isEngChar((char)nowChar)) {
                             nowWord += String.valueOf((char)nowChar);
                             nowChar = reader.read();
                         }
                     }
                     nowWord = nowWord.toLowerCase();
-                    if(wMap.containsKey(nowWord))
+                    if (wMap.containsKey(nowWord))
                         wMap.put(nowWord, wMap.get(nowWord) + 1);
                     else if (!"".equals(nowWord)) {
                         wMap.put(nowWord, 1);
@@ -92,7 +95,7 @@ public class WordCounter {
                 }
                 reader.close();
         }
-        catch(IOException e){
+        catch(IOException e) {
             e.printStackTrace();
         }
         return wMap;

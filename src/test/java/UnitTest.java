@@ -7,12 +7,10 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Iterator;
-import org.junit.Rule;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.junit.rules.ExpectedException;
 
 class UnitTest {
 
@@ -171,20 +169,8 @@ class UnitTest {
         }
     }
 
-    @Rule
-    private ExpectedException exception = ExpectedException.none();
 
     String fileParentPath = "src/test/resources/";
-
-    @Test
-    void testCountFileNotFoundException() {
-        String fileName = "fileNotExist";
-        String relativePath = fileParentPath + fileName;
-        WordCounter wc = new WordCounter();
-        HashMap result = wc.count(relativePath);
-        exception.expect(IOException.class);
-        assertEquals(0, result.size());
-    }
 
     @Test
     void testCountEmptyFile() {
@@ -203,6 +189,20 @@ class UnitTest {
         WordCounter wc = new WordCounter();
         HashMap result = wc.count(relativePath);
         assertEquals(1, result.size());
+    }
+
+    @Test
+    void testCountHyphen() {
+        String fileName = "endWithHyphen.txt";
+        String relativePath = fileParentPath + fileName;
+        WordCounter wc = new WordCounter();
+        HashMap result = wc.count(relativePath);
+        HashMap expect = new HashMap(1);
+        expect.put("hyphen", 1);
+        assertEquals(expect.keySet(), result.keySet());
+        for (Object key: expect.keySet()) {
+            assertEquals((int)expect.get(key), (int)result.get(key));
+        }
     }
 
     @Test

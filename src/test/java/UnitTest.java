@@ -237,5 +237,15 @@ class UnitTest {
         assertEquals(1, result.size());
     }
 
+    @Test
+    @DisplayName("Border test: word with multiple kinds of char")
+    void testCountMultiple() {
+        String fileName = "multiple.txt";
+        String relativePath = fileParentPath + fileName;
+        WordCounter wc = new WordCounter();
+        HashMap result = wc.count(relativePath);
+        assertEquals(4, result.size());
+    }
+
 }
 

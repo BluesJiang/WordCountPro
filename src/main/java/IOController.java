@@ -36,7 +36,7 @@ class IOController {
 
     /**
      * Saves the result sorted
-     * 
+     *
      * @param result the result contain word as key as count as value
      * @return the state code of operation
      */

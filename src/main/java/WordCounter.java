@@ -68,16 +68,20 @@ public class WordCounter {
                     }
                     // judge a legal word
                     while (nowChar != -1 && (isEngChar((char)nowChar) || isHyphen((char)nowChar))){
+                        //specially dealing the Hyphen,divided into three conditions
                         if (isHyphen((char)nowChar)) {
                             nowChar = reader.read();
                             if (isEngChar((char)nowChar)) {
+                                // first condition: Hyphen is in front of EngChar.
                                 if ("".equals(nowWord)) {
                                     nowWord += String.valueOf((char)nowChar) ; 
                                 } else {
+                                // second condition: Hyphen is between with EngChars.
                                     nowWord += "-" + String.valueOf((char)nowChar) ;
                                 }    
                                 nowChar = reader.read();
                             } else {
+                                // third condition: Hyphen is in the end of EngChar.
                                 break;
                             }      
                         }
@@ -86,6 +90,7 @@ public class WordCounter {
                             nowChar = reader.read();
                         }
                     }
+                    // all convert to Lowercase words
                     nowWord = nowWord.toLowerCase();
                     if (wMap.containsKey(nowWord)) {
                         wMap.put(nowWord, wMap.get(nowWord) + 1);

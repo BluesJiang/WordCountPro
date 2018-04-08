@@ -87,9 +87,9 @@ public class WordCounter {
                         }
                     }
                     nowWord = nowWord.toLowerCase();
-                    if (wMap.containsKey(nowWord))
+                    if (wMap.containsKey(nowWord)) {
                         wMap.put(nowWord, wMap.get(nowWord) + 1);
-                    else if (!"".equals(nowWord)) {
+                    } else if (!"".equals(nowWord)) {
                         wMap.put(nowWord, 1);
                     }
                 }

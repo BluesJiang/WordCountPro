@@ -192,6 +192,37 @@ class UnitTest {
     }
 
     @Test
+    @DisplayName("Bord test: wc.count(startWithHyphen.txt)")
+    void testCountFileStartWithHyphen() {
+        String fileName = "startWithHyphen.txt";
+        String relativePath = fileParentPath + fileName;
+        WordCounter wc = new WordCounter();
+        HashMap result = wc.count(relativePath);
+        assertEquals(true, result.containsKey("hyphen"));
+    }
+
+    @Test
+    @DisplayName("Bord test: wc.count(startWithHyphen.txt)")
+    void testNumberStartWithHyphen() {
+        String fileName = "startWithHyphen.txt";
+        String relativePath = fileParentPath + fileName;
+        WordCounter wc = new WordCounter();
+        HashMap result = wc.count(relativePath);
+        assertEquals(1, result.size());
+    }
+
+    @Test
+    @DisplayName("Bord test: wc.count(startWithHyphen.txt)")
+    void testCountFileWithQuatation() {
+        String fileName = "withQuatation.txt";
+        String relativePath = fileParentPath + fileName;
+        WordCounter wc = new WordCounter();
+        HashMap result = wc.count(relativePath);
+        assertEquals(2, result.size());
+    }
+
+
+    @Test
     void testCountHyphen() {
         String fileName = "endWithHyphen.txt";
         String relativePath = fileParentPath + fileName;

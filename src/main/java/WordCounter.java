@@ -69,7 +69,7 @@ public class WordCounter {
                         if(isHyphen((char)nowChar)){
                             nowChar = reader.read();
                             if(isEngChar((char)nowChar)){
-                                if(nowWord.equals(""))
+                                if("".equals(nowWord))
                                     nowWord += String.valueOf((char)nowChar) ; 
                                 else
                                     nowWord += "-" + String.valueOf((char)nowChar) ; 
@@ -86,7 +86,7 @@ public class WordCounter {
                     nowWord = nowWord.toLowerCase();
                     if(wMap.containsKey(nowWord))
                         wMap.put(nowWord, wMap.get(nowWord) + 1);
-                    else if (!nowWord.equals("")) {
+                    else if (!"".equals(nowWord)) {
                         wMap.put(nowWord, 1);
                     }
                 }

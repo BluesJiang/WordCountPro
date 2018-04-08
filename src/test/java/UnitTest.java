@@ -247,6 +247,33 @@ class UnitTest {
     }
 
     @Test
+    @DisplayName("Border test: single quotation mark")
+    void testCountFileWithContinuedHyphen() {
+        String fileName = "continuedHyphen.txt";
+        String relativePath = fileParentPath + fileName;
+        WordCounter wc = new WordCounter();
+        HashMap result = wc.count(relativePath);
+        assertEquals(2, result.size());
+    }
+
+    @Test
+    @DisplayName("Border test: single quotation mark")
+    void testFileWithContinuedHyphen() {
+        String fileName = "continuedHyphen.txt";
+        String relativePath = fileParentPath + fileName;
+        WordCounter wc = new WordCounter();
+        HashMap result = wc.count(relativePath);
+        HashMap expect = new HashMap(1);
+        expect.put("night", 1);
+        expect.put("day", 1);
+        assertEquals(expect.keySet(), result.keySet());
+        for (Object key: expect.keySet()) {
+            assertEquals((int)expect.get(key), (int)result.get(key));
+        }
+    }
+
+
+    @Test
     @DisplayName("Border test: double quotation mark")
     void testCountDoubleQuotationMark() {
         String fileName = "doubleQuotationMark.txt";

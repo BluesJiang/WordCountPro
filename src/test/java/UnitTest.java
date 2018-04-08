@@ -207,7 +207,7 @@ class UnitTest {
 
     @Test
     @DisplayName("Border test: single quotation mark")
-    void testSingleQuotationMark() {
+    void testCountSingleQuotationMark() {
         String fileName = "singleQuotationMark.txt";
         String relativePath = fileParentPath + fileName;
         WordCounter wc = new WordCounter();
@@ -215,5 +215,14 @@ class UnitTest {
         assertEquals(2, result.size());
     }
 
+    @Test
+    @DisplayName("Border test: double quotation mark")
+    void testCountDoubleQuotationMark() {
+        String fileName = "doubleQuotationMark.txt";
+        String relativePath = fileParentPath + fileName;
+        WordCounter wc = new WordCounter();
+        HashMap result = wc.count(relativePath);
+        assertEquals(1, result.size());
+    }
 }
 
